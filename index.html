@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Vikas Rai | Backend Developer</title>
+<meta name="description" content="Vikas Rai, Java backend developer. Struts to Spring Boot migration, REST APIs, and LLM-assisted tooling.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a ledger. Section names sit in a narrow left gutter, content in the wide right
+   column; achievements are rows of figure + description. The hero pairs the pitch with a
+   legacy-to-modern code panel, the one thing only a migration engineer's page would have. */
+:root {
+  --bg: #F3F5FA;
+  --surface: #FFFFFF;
+  --ink: #101A30;
+  --muted: #54607B;
+  --line: #D3DAE8;
+  --accent: #1F3864;
+  --accent-soft: #E2E8F5;
+  --on-accent: #FFFFFF;
+  --code-bg: #0F1930;
+  --code-fg: #DCE4F5;
+  --code-muted: #8795B8;
+  --code-line: #27355C;
+  --code-key: #A9C1F5;
+  --legacy: #EBA493;
+  --modern: #8ED4AB;
+
+  --display: "Bricolage Grotesque", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.5rem;
+  --step-3: clamp(2.5rem, 7vw, 4.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0B1220; --surface: #111A2D; --ink: #E7ECF7; --muted: #9BA7C2; --line: #243049;
+    --accent: #A3BCF4; --accent-soft: #19264A; --on-accent: #0B1220;
+    --code-bg: #070D19; --code-fg: #DCE4F5; --code-muted: #8795B8; --code-line: #1C2845;
+    --code-key: #A9C1F5; --legacy: #EBA493; --modern: #8ED4AB;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0B1220; --surface: #111A2D; --ink: #E7ECF7; --muted: #9BA7C2; --line: #243049;
+  --accent: #A3BCF4; --accent-soft: #19264A; --on-accent: #0B1220;
+  --code-bg: #070D19; --code-fg: #DCE4F5; --code-muted: #8795B8; --code-line: #1C2845;
+  --code-key: #A9C1F5; --legacy: #EBA493; --modern: #8ED4AB;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap {
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 40px);
+  padding-block: 1.25rem 3rem;
+}
+a { color: var(--accent); text-underline-offset: 0.2em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+h1, h2, h3, p, ul, ol, dl, dd, pre { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+/* Top bar */
+.top {
+  display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+  align-items: baseline; justify-content: space-between;
+  padding-bottom: 1rem; border-bottom: 1px solid var(--line);
+}
+.top .who { font-family: var(--mono); font-size: var(--step--1); color: var(--muted); }
+.top nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.top nav a {
+  font-size: 0.9375rem; font-weight: 500; text-decoration: none; color: var(--ink);
+}
+.top nav a:hover { color: var(--accent); text-decoration: underline; }
+
+/* Hero */
+.hero {
+  display: grid; gap: 2.5rem;
+  padding-block: clamp(2.25rem, 6vw, 4rem);
+}
+.hero > * { min-width: 0; }
+.eyebrow {
+  font-family: var(--mono); font-size: var(--step--1); letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted);
+}
+h1 {
+  font-family: var(--display); font-weight: 700; font-size: var(--step-3);
+  line-height: 0.98; letter-spacing: -0.025em; text-wrap: balance;
+  margin-block: 0.75rem 1.25rem;
+}
+.pitch { font-size: var(--step-1); max-width: 34rem; color: var(--ink); }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font: 500 0.9375rem/1 var(--body);
+  padding: 0.8rem 1.1rem; border-radius: 3px; text-decoration: none; cursor: pointer;
+  border: 1px solid var(--accent); background: var(--accent); color: var(--on-accent);
+}
+.btn.ghost { background: transparent; color: var(--accent); }
+.btn:hover { filter: brightness(1.12); }
+.btn.ghost:hover { background: var(--accent-soft); filter: none; }
+
+/* Code panel */
+.panel {
+  background: var(--code-bg); color: var(--code-fg);
+  border-radius: 4px; overflow: hidden; align-self: start;
+}
+.file {
+  display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
+  padding: 0.6rem 1rem; border-bottom: 1px solid var(--code-line);
+  font-family: var(--mono); font-size: 0.75rem; color: var(--code-muted);
+}
+.file + pre + .file { border-top: 1px solid var(--code-line); }
+.tag { letter-spacing: 0.08em; text-transform: uppercase; }
+.tag.legacy { color: var(--legacy); }
+.tag.modern { color: var(--modern); }
+.panel pre {
+  overflow-x: auto; padding: 0.9rem 1rem 1.1rem;
+  font-family: var(--mono); font-size: 0.8125rem; line-height: 1.65; tab-size: 2;
+}
+.panel .k { color: var(--code-key); }
+.panel .s { color: var(--modern); }
+.panel .x { color: var(--legacy); }
+.panel .c { color: var(--code-muted); }
+.panel .note {
+  padding: 0.6rem 1rem; border-top: 1px solid var(--code-line);
+  font-size: 0.75rem; color: var(--code-muted);
+}
+
+/* Fact strip */
+.facts {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.facts div { padding: 1.1rem 1rem 1.1rem 0; }
+.facts dt { font-size: var(--step--1); color: var(--muted); }
+.facts dd {
+  font-family: var(--display); font-weight: 700; font-size: 1.75rem; line-height: 1.15;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+
+/* Sections */
+section { display: grid; gap: 1.25rem; padding-block: clamp(2.25rem, 5vw, 3.5rem); border-bottom: 1px solid var(--line); }
+section > * { min-width: 0; }
+h2 {
+  font-family: var(--mono); font-weight: 500; font-size: var(--step--1);
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+h3 { font-family: var(--display); font-weight: 700; font-size: var(--step-2); line-height: 1.2; text-wrap: balance; }
+.meta { color: var(--muted); margin-top: 0.25rem; }
+.lede { max-width: 40rem; margin-top: 0.9rem; }
+
+/* Achievement ledger */
+.ledger { margin-top: 1.5rem; border-top: 1px solid var(--line); }
+.ledger li {
+  display: grid; gap: 0.25rem 1.5rem; padding-block: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.ledger li > * { min-width: 0; }
+.fig {
+  font-family: var(--mono); font-weight: 500; font-size: 0.9375rem; color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.ledger p { max-width: 40rem; }
+
+/* Pipeline */
+.pipeline { display: grid; gap: 0.75rem; margin-top: 1.5rem; counter-reset: step; }
+.pipeline li {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 3px;
+  padding: 1rem; counter-increment: step; min-width: 0;
+}
+.pipeline li::before {
+  content: "0" counter(step); display: block;
+  font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-bottom: 0.4rem;
+}
+.pipeline strong { display: block; font-family: var(--display); font-size: var(--step-1); font-weight: 700; }
+.pipeline span { display: block; font-size: 0.9375rem; color: var(--muted); margin-top: 0.2rem; }
+.outcome { margin-top: 1.25rem; max-width: 40rem; }
+.outcome b { color: var(--accent); font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.25rem; }
+.chips li {
+  font-family: var(--mono); font-size: 0.75rem; padding: 0.3rem 0.6rem;
+  background: var(--accent-soft); color: var(--accent); border-radius: 2px;
+}
+
+/* Skills */
+.skills { border-top: 1px solid var(--line); }
+.skills div { display: grid; gap: 0.15rem 1.5rem; padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
+.skills dt { font-weight: 600; }
+.skills dd { color: var(--muted); min-width: 0; }
+
+/* Contact */
+.contact { border-bottom: 0; }
+.contact h3 { font-size: clamp(1.75rem, 4.5vw, 2.75rem); letter-spacing: -0.02em; max-width: 30rem; }
+.reach { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.reach dt { font-size: var(--step--1); color: var(--muted); }
+.reach dd { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.9rem; font-size: var(--step-1); overflow-wrap: anywhere; }
+#email-text { user-select: all; font-family: var(--mono); font-size: 0.9375rem; }
+.copy {
+  font: 500 0.8125rem/1 var(--body); padding: 0.45rem 0.7rem; border-radius: 3px; cursor: pointer;
+  background: transparent; color: var(--accent); border: 1px solid var(--accent);
+}
+.copy:hover { background: var(--accent-soft); }
+footer { font-size: var(--step--1); color: var(--muted); padding-top: 1.5rem; border-top: 1px solid var(--line); }
+
+@media (min-width: 40rem) {
+  .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ledger li { grid-template-columns: 11rem minmax(0, 1fr); align-items: baseline; }
+  .skills div { grid-template-columns: 13rem minmax(0, 1fr); }
+  .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reach { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 60rem) {
+  .hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: center; gap: 3.5rem; }
+  section { grid-template-columns: 11rem minmax(0, 1fr); gap: 2rem; }
+  .pipeline { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn, .copy, .top nav a { transition: background-color 0.15s, color 0.15s, filter 0.15s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <span class="who">Vikas Rai / Backend Developer</span>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#project">Project</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Java 17 · Spring Boot · Microservices</p>
+        <h1>I move legacy banking systems onto Spring Boot.</h1>
+        <p class="pitch">I'm Vikas Rai, a backend developer at Coforge in Greater Noida. Over two years I've migrated 15+ Struts modules of a BFSI enterprise application to Spring Boot microservices, and built the LLM-assisted tooling my team now uses to do it faster.</p>
+        <div class="actions">
+          <a class="btn" href="#contact">Get in touch</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/vikas-rai-71711b203" target="_blank" rel="noopener">LinkedIn profile</a>
+        </div>
+      </div>
+
+      <figure class="panel" style="margin:0" aria-label="A Struts action mapping and the Spring Boot controller that replaces it">
+        <div class="file"><span>struts-config.xml</span><span class="tag legacy">Before</span></div>
+<pre><span class="x">&lt;action</span> path=<span class="s">"/accountSummary"</span>
+        type=<span class="s">"com.bank.web.AccountSummaryAction"</span>
+        name=<span class="s">"accountForm"</span> scope=<span class="s">"request"</span><span class="x">&gt;</span>
+  <span class="x">&lt;forward</span> name=<span class="s">"success"</span> path=<span class="s">"/accountSummary.jsp"</span><span class="x">/&gt;</span>
+<span class="x">&lt;/action&gt;</span></pre>
+        <div class="file"><span>AccountSummaryController.java</span><span class="tag modern">After</span></div>
+<pre><span class="k">@RestController</span>
+<span class="k">@RequestMapping</span>(<span class="s">"/api/accounts"</span>)
+public class AccountSummaryController {
+
+  private final AccountService service;
+
+  AccountSummaryController(AccountService service) {
+    this.service = service;
+  }
+
+  <span class="k">@GetMapping</span>(<span class="s">"/{id}/summary"</span>)
+  public AccountSummary summary(<span class="k">@PathVariable</span> Long id) {
+    return service.summaryFor(id);
+  }
+}</pre>
+        <figcaption class="note">Illustrative example of the migration pattern. Not client code.</figcaption>
+      </figure>
+    </div>
+
+    <dl class="facts">
+      <div><dt>Experience</dt><dd>2 years</dd></div>
+      <div><dt>Modules migrated</dt><dd>15+</dd></div>
+      <div><dt>Unit test coverage</dt><dd>85%</dd></div>
+      <div><dt>Can join within</dt><dd>15 days</dd></div>
+    </dl>
+
+    <section id="experience">
+      <h2>Experience</h2>
+      <div>
+        <h3>Software Engineer (Backend)</h3>
+        <p class="meta">Coforge Limited, Greater Noida · October 2024 to present</p>
+        <p class="lede">I work on a large Struts-to-Spring Boot migration for a BFSI enterprise application, owning each of my modules from design through production release.</p>
+        <ul class="ledger">
+          <li>
+            <span class="fig">15+ modules</span>
+            <p>Migrated legacy Struts modules to Spring Boot microservices on Java 17, end to end.</p>
+          </li>
+          <li>
+            <span class="fig">~25% fewer incidents</span>
+            <p>Recurring production incidents in the migrated modules fell by about a quarter.</p>
+          </li>
+          <li>
+            <span class="fig">REST APIs</span>
+            <p>Designed and developed REST APIs that integrate with enterprise banking systems, each documented with OpenAPI/Swagger.</p>
+          </li>
+          <li>
+            <span class="fig">~15% faster</span>
+            <p>Tuned SQL queries and Hibernate/JPA mappings to improve response times on key endpoints.</p>
+          </li>
+          <li>
+            <span class="fig">~30% less effort</span>
+            <p>Built a reusable JSON-to-XML transformation utility adopted across multiple migration modules. It removed duplicated conversion logic and cut per-module development effort.</p>
+          </li>
+          <li>
+            <span class="fig">85% coverage</span>
+            <p>Raised unit test coverage of my modules with JUnit 5 and Mockito, catching regressions before release and reducing defect leakage into QA.</p>
+          </li>
+          <li>
+            <span class="fig">Mentoring</span>
+            <p>Mentored Graduate Engineer Trainees on the migration codebase, Git workflow, and testing practices, shortening their ramp-up time.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="project">
+      <h2>Key project</h2>
+      <div>
+        <h3>Struts-to-Spring Boot Migration Accelerator</h3>
+        <p class="meta">Internal tooling at Coforge</p>
+        <p class="lede">Converting Struts action classes by hand is slow and easy to get wrong. I built a tool that does the first pass and checks its own output before a reviewer sees it.</p>
+        <ol class="pipeline">
+          <li><strong>Parse</strong><span>Static parsing of the Struts XML configuration.</span></li>
+          <li><strong>Translate</strong><span>LLM-based translation of action classes and configuration.</span></li>
+          <li><strong>Generate</strong><span>Spring Boot controllers, services, and beans as scaffolding.</span></li>
+          <li><strong>Validate</strong><span>Legacy and generated request mappings compared to catch translation gaps.</span></li>
+        </ol>
+        <p class="outcome">The migration team adopted it as part of the standard workflow, and manual conversion effort dropped by <b>about 40%</b>.</p>
+        <ul class="chips" aria-label="Technologies used">
+          <li>Java 17</li><li>Spring Boot</li><li>LLM APIs</li><li>XML/JSON parsing</li><li>Maven</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <div><dt>Languages and frameworks</dt><dd>Java 17, Spring Boot, Spring MVC, Hibernate/JPA, Microservices, Struts (legacy)</dd></div>
+        <div><dt>APIs and integration</dt><dd>REST API design, OpenAPI/Swagger, JSON/XML data transformation, LLM API integration</dd></div>
+        <div><dt>Databases</dt><dd>MySQL, PostgreSQL, SQL query optimization, indexing, JPA/Hibernate query tuning</dd></div>
+        <div><dt>Testing and quality</dt><dd>JUnit 5, Mockito, unit testing, code reviews</dd></div>
+        <div><dt>Tools and practices</dt><dd>Git, Maven, Jenkins (CI/CD), Jira, Agile/Scrum, AI/LLM-assisted development</dd></div>
+      </dl>
+    </section>
+
+    <section id="education">
+      <h2>Education</h2>
+      <div>
+        <h3>B.Tech, Computer Science and Engineering</h3>
+        <p class="meta">G.L. Bajaj Institute of Technology and Management, Greater Noida · 2024</p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <h2>Contact</h2>
+      <div>
+        <h3>Hiring for a Java backend role? I can join within 15 days.</h3>
+        <dl class="reach">
+          <div>
+            <dt>Email</dt>
+            <dd><span id="email-text">vikasrai10042001@gmail.com</span><button class="copy" id="copy-email" type="button">Copy</button></dd>
+          </div>
+          <div>
+            <dt>LinkedIn</dt>
+            <dd><a href="https://www.linkedin.com/in/vikas-rai-71711b203" target="_blank" rel="noopener">linkedin.com/in/vikas-rai-71711b203</a></dd>
+          </div>
+          <div>
+            <dt>Location</dt>
+            <dd>Greater Noida, India</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer>Vikas Rai · Backend Developer</footer>
+</div>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy-email');
+  var text = document.getElementById('email-text');
+  if (!btn || !text) return;
+  function selectText() {
+    var range = document.createRange();
+    range.selectNodeContents(text);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  function flash(label) {
+    btn.textContent = label;
+    setTimeout(function () { btn.textContent = 'Copy'; }, 1800);
+  }
+  btn.addEventListener('click', function () {
+    var done = function () { flash('Copied'); };
+    var fallback = function () { selectText(); flash('Selected'); };
+    try {
+      navigator.clipboard.writeText(text.textContent.trim()).then(done, fallback);
+    } catch (e) {
+      fallback();
+    }
+  });
+})();
+</script>
+</body>
+</html>
